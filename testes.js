@@ -13,16 +13,15 @@ function calcularValorDaCompra(metodoDePagamento, itens){
         result = "Forma de pagamento inválida!"
         return result
     }
-    
     if (itens.length == 0) {
-        console.log("entrou")
         result = "Não há itens no carrinho de compra!"
     }
-    else if (forma){
-        for (i in itens.length){
+    else{
+        for(i in itens.length){
             item_props = itens[i].split(',')
             const item = new Item(item_props[0],item_props[1])
             if (item.quant < 1 | typeof item.quant === "string") {
+                console.log("entrou")
                 result = "Quantidade inválida!"
                 break
             }
@@ -35,10 +34,7 @@ function calcularValorDaCompra(metodoDePagamento, itens){
         }
         result = result + (result*forma.desc)
     }
-    else{
-        result = "Forma de pagamento inválida!"
-    }
     return console.log(result);
 }
 
-calcularValorDaCompra('dinheiro', [])
+calcularValorDaCompra('dinheiro', ['café,0'])
