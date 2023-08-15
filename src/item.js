@@ -3,6 +3,6 @@ class Item {
          this.codigo = codigo; 
          this.quant = quant;     
     }
-} 
+}
 
 export default Item;

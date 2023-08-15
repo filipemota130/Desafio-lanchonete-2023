@@ -4,30 +4,33 @@ import formas_de_pagamento from './base-de-pagamentos.js';
 
 class CaixaDaLanchonete {
     calcularValorDaCompra(metodoDePagamento, itens) {
-        if (itens.length === 0){
-            console.log('itens')
+        let result = 0;
+        var forma = formas_de_pagamento.find(metodoDePagamento)
+        if (Array.isArray(itens) && itens.length <= 0) {
+            console.log(itens)
+            result="Não há itens no carrinho de compra!"
         }
-        else if (formas_de_pagamento.find(metodoDePagamento)){
-            total = 0;
+        else if (forma){
             for (i in itens.length){
                 item_props = itens[i].split(',')
                 const item = new Item(item_props[0],item_props[1])
-                if (item == null){
-                    console.log("Item inválido!")
+                if (item.quant < 1 | typeof item.quant === "string") {
+                    result = "Quantidade inválida!"
                     break
                 }
-                else if (item.quant < 1){
-                    console.log("Quantidade inválida!")
+                product = Lista_de_Produtos.find(item.codigo)
+                if (product === null){
+                    result = "Item inválido!"
                     break
                 }
-                result = Lista_de_Produtos.find(item.codigo)
-                total += result.valor * item.quant
+                result += product.valor * item.quant
             }
+            result = result + (result*forma.desc)
         }
         else{
-            console.log("Forma de pagamento inválida!")
+            result = "Forma de pagamento inválida!"
         }
-        return "";
+        return result;
     }
 }
 
