@@ -38,8 +38,10 @@ class CaixaDaLanchonete {
     }
     
     calcularValorDaCompra(metodoDePagamento, itens){
-        let result = 0, forma, product, item_props, prod_list = [], code, quant , chec;
+        let result = 0, forma, product, item_props, prod_list = [], code, quant;
+        
         forma = this.paymentValidator(metodoDePagamento)
+
         if(!forma){
             result = "Forma de pagamento inválida!"
         }
